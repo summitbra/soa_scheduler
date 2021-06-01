@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sensors xmlns="http://xmlns.oracle.com/bpel/sensor">
+    <sensor sensorName="app-name" kind="service" target="undefined" filter="" xmlns:inp1="http://www.example.org">
+        <serviceConfig service="SchedulerService" expression="$in.request/inp1:app/inp1:app-name" operation="startApp" outputDataType="string" outputNamespace="http://www.w3.org/2001/XMLSchema"/>
+    </sensor>
+</sensors>
