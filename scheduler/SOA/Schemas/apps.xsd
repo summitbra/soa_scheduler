@@ -8,6 +8,7 @@
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="app-name" type="xsd:string"/>
+        <xsd:element name="arg1" type="xsd:string"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

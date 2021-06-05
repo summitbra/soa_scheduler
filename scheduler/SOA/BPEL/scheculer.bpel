@@ -28,7 +28,9 @@
          xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns3="http://xmlns.oracle.com/pickTest/Project1/BPELProcess"
-         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns4="http://xmlns.oracle.com/Scheduler/scheduler/PortalReport"
+         xmlns:ns5="http://TargetNamespace.com/PortalReport_StartPortalReport_request">
 
   <!--
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +44,7 @@
           ui:processWSDL="true"/>
   <partnerLinks>
     <partnerLink name="SchedulerService" partnerLinkType="ns1:SchedulerService" myRole="SchedulerServiceProvider"/>
+    <partnerLink name="PortalReport" partnerLinkType="ns4:PortalReport" partnerRole="PortalReportProvider"/>
   </partnerLinks>
   <variables>
     <variable name="Receive_startApp_InputVariable" messageType="ns1:startApp_inputMessage"/>
@@ -61,10 +64,24 @@
         </scope>
       </sequence>
       <elseif>
-        <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Receive_startApp_InputVariable.request/ns2:app-name = 'test'</condition>
+        <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Receive_startApp_InputVariable.request/ns2:app-name = 'PortalReport'</condition>
         <sequence name="Sequence2">
           <scope name="Scope2">
-            <empty name="Empty2"/>
+            <variables>
+              <variable name="PortalReportInput" messageType="ns4:StartPortalReport_inputMessage"/>
+              <variable name="PortalReportOutput" messageType="ns4:Rest_EmptyMessage"/>
+            </variables>
+            <sequence name="Sequence3">
+              <assign name="setPortalRequest">
+                <copy>
+                  <from>$Receive_startApp_InputVariable.request/ns2:arg1</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$PortalReportInput.request/ns5:message</to>
+                </copy>
+              </assign>
+              <invoke name="StartPortalPeport" partnerLink="PortalReport"
+                      portType="ns4:PortalReport_ptt" operation="StartPortalReport" inputVariable="PortalReportInput"
+                      outputVariable="PortalReportOutput" bpelx:invokeAsDetail="no"/>
+            </sequence>
           </scope>
         </sequence>
       </elseif>

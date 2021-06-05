@@ -1,0 +1,27 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="ServidorRDSTest" className="oracle.jdeveloper.db.adapter.DatabaseProvider"
+             credentialStoreKey="ServidorRDSTest" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>test-estorno-adquirinte.cphjsqip1tyk.sa-east-1.rds.amazonaws.com</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>ORCL</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>admin</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+</References>

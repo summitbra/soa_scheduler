@@ -13,6 +13,8 @@
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
   <import namespace="http://xmlns.oracle.com/Scheduler/scheduler/SchedulerService"
           location="WSDLs/SchedulerService.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/Scheduler/scheduler/PortalReport" location="WSDLs/PortalReport.wsdl"
+          importType="wsdl"/>
   <service name="SchedulerService" ui:wsdlLocation="WSDLs/SchedulerService.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/Scheduler/scheduler/SchedulerService#wsdl.interface(SchedulerService_ptt)"/>
     <binding.rest config="WADLs/SchedulerService.wadl"/>
@@ -29,10 +31,22 @@
       <service name="SchedulerService" ui:wsdlLocation="WSDLs/SchedulerService.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/Scheduler/scheduler/SchedulerService#wsdl.interface(SchedulerService_ptt)"/>
       </service>
+      <reference name="PortalReport" ui:wsdlLocation="WSDLs/PortalReport.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/Scheduler/scheduler/PortalReport#wsdl.interface(PortalReport_ptt)"/>
+      </reference>
     </componentType>
   </component>
+  <reference name="PortalReport" ui:wsdlLocation="WSDLs/PortalReport.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/Scheduler/scheduler/PortalReport#wsdl.interface(PortalReport_ptt)"/>
+    <binding.rest config="WADLs/PortalReport.wadl"
+                  location="http://localhost:7003/soa-infra/resources/default/PortalAgendamentos-Middleware-Reports/StartReport"/>
+  </reference>
   <wire>
     <source.uri>SchedulerService</source.uri>
     <target.uri>scheculer/SchedulerService</target.uri>
+  </wire>
+  <wire>
+    <source.uri>scheculer/PortalReport</source.uri>
+    <target.uri>PortalReport</target.uri>
   </wire>
 </composite>
