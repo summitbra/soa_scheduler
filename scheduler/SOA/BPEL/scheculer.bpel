@@ -30,7 +30,8 @@
          xmlns:ns3="http://xmlns.oracle.com/pickTest/Project1/BPELProcess"
          xmlns:ui="http://xmlns.oracle.com/soa/designer"
          xmlns:ns4="http://xmlns.oracle.com/Scheduler/scheduler/PortalReport"
-         xmlns:ns5="http://TargetNamespace.com/PortalReport_StartPortalReport_request">
+         xmlns:ns5="http://TargetNamespace.com/PortalReport_StartPortalReport_request"
+         xmlns:ns6="http://xmlns.oracle.com/Scheduler/scheduler/CarteiraReport">
 
   <!--
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +46,7 @@
   <partnerLinks>
     <partnerLink name="SchedulerService" partnerLinkType="ns1:SchedulerService" myRole="SchedulerServiceProvider"/>
     <partnerLink name="PortalReport" partnerLinkType="ns4:PortalReport" partnerRole="PortalReportProvider"/>
+    <partnerLink name="CarteiraReport" partnerLinkType="ns6:CarteiraReport" partnerRole="CarteiraReportProvider"/>
   </partnerLinks>
   <variables>
     <variable name="Receive_startApp_InputVariable" messageType="ns1:startApp_inputMessage"/>
@@ -66,7 +68,7 @@
       <elseif>
         <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Receive_startApp_InputVariable.request/ns2:app-name = 'PortalReport'</condition>
         <sequence name="Sequence2">
-          <scope name="Scope2">
+          <scope name="ScopePortal">
             <variables>
               <variable name="PortalReportInput" messageType="ns4:StartPortalReport_inputMessage"/>
               <variable name="PortalReportOutput" messageType="ns4:Rest_EmptyMessage"/>
@@ -84,6 +86,27 @@
             </sequence>
           </scope>
         </sequence>
+      </elseif>
+      <elseif>
+        <condition>$Receive_startApp_InputVariable.request/ns2:app-name = 'CarteiraReport'</condition>
+        <scope name="ScopeCarteira">
+          <variables>
+            <variable name="StartCarteiraReport_Input" messageType="ns6:PostCarteiraReport_inputMessage"/>
+            <variable name="StartCarteiraReport_Output" messageType="ns6:Rest_EmptyMessage"/>
+          </variables>
+          <sequence name="Sequence4">
+            <assign name="SetCarteiraRequest">
+              <copy>
+                <from>$Receive_startApp_InputVariable.request/ns2:arg1</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$StartCarteiraReport_Input.request/ns5:message</to>
+              </copy>
+            </assign>
+            <invoke name="StartCarteiraReport"
+                    inputVariable="StartCarteiraReport_Input"
+                    outputVariable="StartCarteiraReport_Output" bpelx:invokeAsDetail="no" partnerLink="CarteiraReport"
+                    portType="ns6:CarteiraReport_ptt" operation="PostCarteiraReport"/>
+          </sequence>
+        </scope>
       </elseif>
     </if>
     <reply name="Reply" partnerLink="SchedulerService" variable="Reply_startApp_OutputVariable"

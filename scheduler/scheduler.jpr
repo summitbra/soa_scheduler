@@ -82,6 +82,8 @@
          <string v="Java"/>
          <string v="SOA"/>
          <string v="Spring"/>
+         <string v="WSDL"/>
+         <string v="WSPolicy"/>
          <string v="XML"/>
          <string v="XML_SCHEMA"/>
       </list>

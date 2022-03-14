@@ -16,7 +16,7 @@ public class Comunicator {
 
         try {
 
-            URL url = new URL("http://localhost:7003/soa-infra/resources/default/scheduler/SchedulerService");
+            URL url = new URL("http://172.23.13.81:8001/soa-infra/resources/default/scheduler/SchedulerService");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");

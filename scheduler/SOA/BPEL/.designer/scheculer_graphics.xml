@@ -4,10 +4,11 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="SchedulerService" x="0" y="397" side="left"/>
-      <partnerlink name="PortalReport" x="882" y="462" side="right"/>
+      <partnerlink name="SchedulerService" x="0" y="400" side="left"/>
+      <partnerlink name="CarteiraReport" x="0" y="457" side="left"/>
+      <partnerlink name="PortalReport" x="1144" y="462" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,150,817,346" show_swimlanes="true">
+   <graph_layout viewport="0,106,1263,561" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/if/sequence" type="sequence"/>
@@ -15,6 +16,8 @@
       <layout_item collapsed="false" xpath="/process/sequence/if/elseif/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/if/elseif/sequence/scope" type="scope" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence/if/elseif/sequence/scope/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/if/elseif/scope" type="scope" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence/if/elseif/scope/sequence" type="sequence"/>
    </graph_layout>
    <bookmarks/>
 </graphics>

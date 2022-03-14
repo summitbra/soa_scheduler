@@ -1,0 +1,38 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="CarteiraReport"
+     targetNamespace="http://xmlns.oracle.com/Scheduler/scheduler/CarteiraReport"
+     xmlns:tns="http://xmlns.oracle.com/Scheduler/scheduler/CarteiraReport"
+     xmlns:inp1="http://TargetNamespace.com/PortalReport_StartPortalReport_request"
+     xmlns:inp2="http://xmlns.oracle.com/Scheduler/scheduler/CarteiraReport"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="CarteiraReport">
+        <plnk:role name="CarteiraReportProvider" portType="tns:CarteiraReport_ptt"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/PortalReport_StartPortalReport_request"
+                 schemaLocation="../Schemas/PortalReport.xsd"/>
+        </xsd:schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.oracle.com/Scheduler/scheduler/CarteiraReport"
+             elementFormDefault="qualified">
+            <element name="empty">
+                <complexType/>
+            </element>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="PostCarteiraReport_inputMessage">
+        <wsdl:part name="request" element="inp1:PortalReport"/>
+    </wsdl:message>
+    <wsdl:message name="Rest_EmptyMessage">
+        <wsdl:part name="Empty" element="tns:empty"/>
+    </wsdl:message>
+    <wsdl:portType name="CarteiraReport_ptt">
+        <wsdl:operation name="PostCarteiraReport">
+            <wsdl:input message="tns:PostCarteiraReport_inputMessage"/>
+            <wsdl:output message="tns:Rest_EmptyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
